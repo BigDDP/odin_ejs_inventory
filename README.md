@@ -1,0 +1,2 @@
+# odin_ejs_inventory
+https://www.theodinproject.com/lessons/node-path-nodejs-inventory-application

@@ -1,5 +1,5 @@
 {
-  "name": "odin_ejs_messageboard",
+  "name": "odin-ejs-inventory",
   "version": "1.0.0",
   "description": "Mini message board built with Express and EJS (The Odin Project)",
   "main": "src/app.js",

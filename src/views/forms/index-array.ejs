@@ -1,0 +1,48 @@
+<div class="flex flex-col gap-5">
+<form method="get" action="/" class="max-w-md mx-auto flex flex-col gap-3">
+    <input type="search" name="search" value="<%= filters.search %>" placeholder="Search items"
+           class="border rounded-lg px-3 py-2">
+
+    <div class="flex flex-wrap gap-2">
+        <% categories.forEach((category) => { %>
+            <label class="cursor-pointer">
+                <input type="checkbox" name="categories" value="<%= category.id %>" class="peer sr-only"
+                       <%= filters.categories.includes(category.id) ? 'checked' : '' %>>
+                <span class="block rounded-lg px-3 py-1 text-white bg-blue-600 peer-checked:bg-green-600">
+                    <%= category.text %>
+                </span>
+            </label>
+        <% }) %>
+    </div>
+
+    <div class="grid grid-cols-2 gap-2">
+        <input type="number" name="minCost" value="<%= query.minCost ?? '' %>" placeholder="Min cost" class="border rounded-lg px-3 py-2">
+        <input type="number" name="maxCost" value="<%= query.maxCost ?? '' %>" placeholder="Max cost" class="border rounded-lg px-3 py-2">
+        <input type="number" name="minSupply" value="<%= query.minSupply ?? '' %>" placeholder="Min supply" class="border rounded-lg px-3 py-2">
+        <input type="number" name="maxSupply" value="<%= query.maxSupply ?? '' %>" placeholder="Max supply" class="border rounded-lg px-3 py-2">
+    </div>
+
+    <div class="flex gap-2">
+        <button type="submit" class="bg-blue-600 text-white rounded-lg px-4 py-2">Filter</button>
+        <a href="/" class="rounded-lg px-4 py-2 border">Clear</a>
+    </div>
+</form>
+
+<div class="max-w-md mx-auto flex flex-col gap-3">
+    <% items.forEach((item) => { %>
+        <% const itemCategory = categories.find((c) => c.id === item.category) %>
+        <div class="relative bg-white rounded-xl shadow p-4 flex flex-col gap-1">
+            <% if (itemCategory) { %>
+                <span class="absolute top-[10px] right-[10px] rounded-md bg-blue-100 text-blue-700 text-xs font-medium px-2 py-0.5"><%= itemCategory.text %></span>
+            <% } %>
+            <h3 class="font-semibold text-gray-900 <%= itemCategory ? 'pr-24' : '' %>"><%= item.text %></h3>
+            <p class="text-gray-500"><%= item.description %></p>
+            <div class="flex items-center justify-between">
+                <a href="/items/<%= item.id %>" class="text-sm text-blue-600 hover:underline">Edit</a>
+                <p class="text-xs text-gray-400">Supply: <%= item.supply %></p>
+                <p class="text-xs text-gray-400">Cost: $<%= item.cost %></p>
+            </div>
+        </div>
+     <% }) %>
+</div>
+</div>

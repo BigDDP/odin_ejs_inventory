@@ -1,0 +1,27 @@
+{
+  "name": "odin_ejs_messageboard",
+  "version": "1.0.0",
+  "description": "Mini message board built with Express and EJS (The Odin Project)",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node --env-file=.env src/app.js",
+    "dev": "node --watch --env-file=.env src/app.js",
+    "seed": "node --env-file=.env src/db/seed.js"
+  },
+  "keywords": [],
+  "author": "Ben",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "express-validator": "^7.3.2",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "wrangler": "^4.152.0"
+  }
+}

@@ -1,0 +1,64 @@
+<%- include("partials/head") %>
+
+<html>
+    <body class="bg-gray-100 min-h-screen">
+        <div class="max-w-md mx-auto pt-16 pb-6 flex items-center justify-between">
+            <h1 class="text-2xl font-semibold text-gray-900"><%= item ? 'Edit Item' : 'New Item' %></h1>
+            <a href="/" class="bg-blue-600 text-white font-medium rounded-lg px-4 py-2 hover:bg-blue-700">Home</a>
+        </div>
+
+        <form method="POST" action="<%= item ? `/items/${item.id}/update` : '/items/new' %>"class="max-w-md mx-auto p-6 bg-white rounded-xl shadow flex flex-col gap-4">
+            <% if (errors.length) { %>
+                <ul class="bg-red-50 text-red-700 rounded-lg p-3 text-sm list-disc list-inside">
+                    <% errors.forEach((error) => { %>
+                        <li><%= error %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+
+            <label class="flex flex-col gap-1 text-sm font-medium text-gray-700">
+                Name
+                <input type="text" name="text" value="<%= values.text %>" required maxlength="255"
+                       pattern="[A-Za-z0-9() ]+" title="Letters, numbers, spaces and brackets ( ) only"
+                       class="border border-gray-300 rounded-lg px-3 py-2 font-normal focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </label>
+
+            <label class="flex flex-col gap-1 text-sm font-medium text-gray-700">
+                Description
+                <textarea name="description" rows="3" maxlength="2000"
+                          class="border border-gray-300 rounded-lg px-3 py-2 font-normal focus:outline-none focus:ring-2 focus:ring-blue-500"><%= values.description %></textarea>
+            </label>
+
+            <div class="grid grid-cols-2 gap-3">
+                <label class="flex flex-col gap-1 text-sm font-medium text-gray-700">
+                    Supply
+                    <input type="number" name="supply" value="<%= values.supply %>" required min="0" step="1"
+                           class="border border-gray-300 rounded-lg px-3 py-2 font-normal focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </label>
+                <label class="flex flex-col gap-1 text-sm font-medium text-gray-700">
+                    Cost ($)
+                    <input type="number" name="cost" value="<%= values.cost %>" required min="0" step="1"
+                           class="border border-gray-300 rounded-lg px-3 py-2 font-normal focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </label>
+            </div>
+
+            <label class="flex flex-col gap-1 text-sm font-medium text-gray-700">
+                Image URL
+                <input type="url" name="img" value="<%= values.img %>" maxlength="2000" placeholder="https://"
+                       class="border border-gray-300 rounded-lg px-3 py-2 font-normal focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </label>
+
+            <label class="flex flex-col gap-1 text-sm font-medium text-gray-700">
+                Category
+                <select name="category" class="border border-gray-300 rounded-lg px-3 py-2 font-normal focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">No category</option>
+                    <% categories.forEach((category) => { %>
+                        <option value="<%= category.id %>" <%= String(category.id) === values.category ? 'selected' : '' %>><%= category.text %></option>
+                    <% }) %>
+                </select>
+            </label>
+
+            <button type="submit" class="bg-blue-600 text-white font-medium rounded-lg px-4 py-2 hover:bg-blue-700"><%= item ? 'Save Changes' : 'Add Item' %></button>
+        </form>
+    </body>
+</html>

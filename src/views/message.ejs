@@ -1,0 +1,14 @@
+<%- include("partials/head") %>
+
+<html>
+    <body class="bg-gray-100 min-h-screen">
+        <div class="max-w-md mx-auto pt-16 flex flex-col gap-4">
+            <a href="/" class="text-sm text-blue-600 hover:underline">&larr; Back</a>
+            <div class="bg-white rounded-xl shadow p-6 flex flex-col gap-2">
+                <h1 class="text-2xl font-semibold text-gray-900"><%= message.username %></h1>
+                <p class="text-gray-700"><%= message.text %></p>
+                <p class="text-xs text-gray-400 text-right"><%= dateFormatter(message.added) %></p>
+            </div>
+        </div>
+    </body>
+</html>

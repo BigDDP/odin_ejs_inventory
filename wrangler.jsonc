@@ -1,0 +1,10 @@
+{
+  "name": "odin-ejs-messageboard",
+  "main": "src/worker.mjs",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  // Precompile the EJS views before each dev/deploy (see scripts/build-views.js)
+  "build": { "command": "node scripts/build-views.js", "watch_dir": "src/views" },
+  // Workers have no __dirname; views come from src/views.generated.js instead
+  "define": { "__dirname": "\"/\"" }
+}

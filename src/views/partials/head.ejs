@@ -1,0 +1,21 @@
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script>
+    // Every POST form (create/update/delete) asks for the admin password first.
+    // The server checks it — see src/middleware/requireAdmin.js.
+    document.addEventListener("submit", (event) => {
+        const form = event.target
+        if (form.method.toLowerCase() !== "post") return
+
+        const password = prompt("Enter the admin password:")
+        if (password === null) return event.preventDefault()
+
+        let field = form.querySelector('input[name="adminPassword"]')
+        if (!field) {
+            field = document.createElement("input")
+            field.type = "hidden"
+            field.name = "adminPassword"
+            form.appendChild(field)
+        }
+        field.value = password
+    })
+</script>
